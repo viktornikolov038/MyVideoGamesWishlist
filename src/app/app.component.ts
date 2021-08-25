@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FirebaseService } from './services/firebase.service';
+import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,30 +7,34 @@ import { FirebaseService } from './services/firebase.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MyVideoGamesWishlist';
-  isSignedIn=false;
-  constructor(public firebaseService:FirebaseService){
+  [x: string]: any;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+  constructor(private tokenStorageService: TokenStorageService, ) { 
 
   }
-  ngOnInit(){
-    if(localStorage.getItem('user')!==null)
-    
-      this.isSignedIn=true;
-      else 
-    this.isSignedIn=false;
+
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
   }
-  async  onSignup(email:string,password:string){
-    await this.firebaseService.signup(email,password);
-    if(this.firebaseService.isLogged)
-    this.isSignedIn=true;
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
-  async  onSignin(email:string,password:string){
-    await this.firebaseService.signin(email,password);
-    if(this.firebaseService.isLogged)
-    this.isSignedIn=true;
-  }
-  handleLogout(){
-    this.isSignedIn=false;
-    
-  }
+  
+  
 }
