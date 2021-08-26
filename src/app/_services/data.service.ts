@@ -22,7 +22,7 @@ export class HttpService {
       params = new HttpParams().set('ordering', ordering).set('search', search);
     }
 
-    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games?page_size=50&dates=2001-10-10,2020-10-10`, {
       params: params,
     });
   }

@@ -11,6 +11,7 @@
             <mat-option value="metacritic">Metacritic</mat-option>
         </mat-select>
     </mat-form-field>
+
 </div>
 
 <div class="games">
@@ -23,7 +24,7 @@
             <div class="game-description">
                 <p class="game-name">{{ game.name }}</p>
                 <div class="game-platforms">
-                    <!-- <img *ngFor="let gamePlatform of game.parent_platforms" class="game-platform" src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg" alt="{{ gamePlatform.platform.slug }}" /> -->
+                    <img *ngFor="let gamePlatform of game.parent_platforms" class="game-platform" src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg" alt="{{ gamePlatform.platform.slug }}" />
                 </div>
             </div>
         </div>
