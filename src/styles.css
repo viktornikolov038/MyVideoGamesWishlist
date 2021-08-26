@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Montserrat", sans-serif;
+    background: url('https://media.istockphoto.com/vectors/retro-gaming-maze-game-background-vector-id1271615792?k=6&m=1271615792&s=612x612&w=0&h=KsZH7uF3cAUhgpV5R09qFKXNMVXaDu5LILBja38Jkag=')
+}

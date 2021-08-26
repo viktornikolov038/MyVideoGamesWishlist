@@ -1,0 +1,42 @@
+.nav-link {
+    color: #e5dc15;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 2px solid #e5dc15;
+    border-radius: 0.5rem;
+    position: relative;
+    top: 0;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.6em #c2bb11, 0 0.9em rgba(0, 0, 0, 0.4);
+    &:hover {
+        background: #e5dc15;
+        color: #0e79b2;
+    }
+}
+
+.navbar-brand {
+    color: #e5dc15;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 2px solid #e5dc15;
+    border-radius: 0.5rem;
+    position: relative;
+    top: 0;
+    transition: all 300ms ease-in-out;
+    &:hover {
+        background: #e5dc15;
+        color: #0e79b2;
+    }
+    box-shadow: 0 0.6em #c2bb11,
+    0 0.9em rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    color: #e91F62;
+}

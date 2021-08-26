@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/_services/data.service'
+
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   public games: Array<Game>;
   private routeSub: Subscription;
   private gameSub: Subscription;
-
+  isLoggedIn = false;
   constructor(    
     private httpService: HttpService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private tokenStorage: TokenStorageService) { 
+    }
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
@@ -28,8 +32,12 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.searchGames('metacrit');
       }
     });
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
+ 
   searchGames(sort: string, search?: string): void {
     this.gameSub = this.httpService
       .getGameList(sort, search)
@@ -41,7 +49,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   openGameDetails(id :string): void {
     this.router.navigate(['details', id]);
   }
-  
 
   ngOnDestroy(): void {
     if (this.gameSub) {
